@@ -27,14 +27,13 @@ class HomeController extends AbstractController
         $article-> title = "Theorie du complot";
         $article->intro = " Its a complot thats its its its";
         $article->content = "bla bla bla , ye ye ye , uf u fu f"; */
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        return $this->render('home/index.html.twig', []);
             /*   "user" => $user 
             'article' => $article,
             'auteur' => $author 
            "games" => $games 
               "games" => $games  
             "city" => $city */
-        ]);
+       
     }
 }
