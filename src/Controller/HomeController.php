@@ -16,11 +16,6 @@ class HomeController extends AbstractController
     public function index(ArticleRepository $repo)
     {
 
-    $slugify = new Slugify();
-   $article = $repo->findOneById(4);
-    dump($slugify->slugify($article->getTitle() . time() . hash( "sha1" , $article->getIntro())));
-
-
         $articles = $repo->findLastArticles(3);
        /*  $faker = Factory::create("fr_FR");
 

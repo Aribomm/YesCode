@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\PrePersist;
+use Cocur\Slugify\Slugify;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -17,7 +23,7 @@ class Article
      */
     private $id;
 
-    /**
+    /** 
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -41,6 +47,27 @@ class Article
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+     /** @PrePersist */
+    public function initSlug(){
+        if (empty($this->slug)) {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->getTitle() . time() . hash( "sha1" , $this->getIntro()));
+        }
+    }
+
+     /** @PrePersist */
+    public function updateDate(){
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
 
     public function getId(): ?int
     {
@@ -103,6 +130,26 @@ class Article
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }
