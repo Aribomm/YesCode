@@ -18,23 +18,42 @@ class ArticleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Article::class);
     }
-
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function save(Article $entity, bool $flush = false): void
     {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Article $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * Renvoie les n derniers articles
+     *
+     * @param int $number le nombre d'articles voulues
+     * 
+     * @return array renvoi un tableau d'article
+     */
+    public function findLastArticles($nombre){
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('a.createdAt', 'DESC')    
+            ->setMaxResults($nombre)
             ->getQuery()
             ->getResult()
-        ;
+       ;
+
     }
-    */
+
+
 
     /*
     public function findOneBySomeField($value): ?Article
