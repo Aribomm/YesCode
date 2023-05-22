@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
         $title = $faker->sentence(2); 
         $intro = $faker->paragraph(2); 
         $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
-        $image = "https://picsum.photos/400/300";
+        $image = $faker->imageUrl();
 
         $createdAt = $faker->dateTimeBetween('-2 months');
 
