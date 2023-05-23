@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
         $title = $faker->sentence(2); 
         $intro = $faker->paragraph(2); 
-        $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
+        $content ="<p>" . implode("</p><p>",$faker->paragraphs(3)) . "<p>" ; 
         $image = $faker->imageUrl();
 
        /*  $createdAt = $faker->dateTimeBetween('-2 months');
@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             // $manager->persist();
         }
 
-        $manager->flush();
+        $manager->flush();      
     }
 }
           
