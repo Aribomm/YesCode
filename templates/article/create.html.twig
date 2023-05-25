@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publier un article{% endblock %}
+
+{% block body %}
+    <h1 class="my-5">Publier un article</h1>
+
+    <div class="col-10 m-auto">
+        {{ form_start(form) }}
+
+      {% if form.vars.errors|length > 0 %}
+    {# Vérifier s'il y a des erreurs de validation dans le formulaire #}
+    <div class="alert alert-danger">
+        {% for error in form.vars.errors %}
+            {# Parcourir les erreurs et afficher chaque message d'erreur #}
+            <div>{{ error.message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{{ form_start(form) }}
+    {# Commencer le formulaire #}
+    {{ form_widget(form) }}
+    {# Afficher les champs du formulaire #}
+{{ form_end(form) }}
+    {# Terminer le formulaire #}
+
+        
+     
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

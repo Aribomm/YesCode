@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit Article
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Article</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.intro) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.image) }}
+    {{ form_end(form) }}
+{% endblock %}

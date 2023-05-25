@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<h1 class="my-5">
+    Nos utilisateurs
+</h1>
+
+<div class="row flex-lg-row flex-xl-row flex-column">
+
+    {% for user in users %}
+        {% include "partials/card.user.html.twig" %}
+    {% endfor %}
+        
+</div>
+{% endblock %}
